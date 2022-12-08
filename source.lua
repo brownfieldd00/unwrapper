@@ -33,8 +33,48 @@ function util:GetServices()
             util.services[v.Name] = ret
         end
     end
+    return util.services
 end
 function util:Get(x)
     return rawget(util.services, x)
 end
+function util:InitFunctions()
+    return util.functions
+end
+function util:executeNow(func, ...)
+    local success, ret = pcall(function(...)
+        return func(...)
+    end)
+    if success then
+        return true, ret
+    else
+        return false, {}
+    end
+end
+function util:loadModuleFromGC(ressemblances)
+    ressemblances = {
+        'Get', 'Fetch'
+    }
+    local gc = getgc(true)
+    local Module;
+    for i, v in pairs(gc) do
+        if type(v) == 'table' then
+            local module = v
+            local amountMatched = 0
+            for i, v in pairs(ressemblances) do
+                for x, y in pairs(module) do
+                    if v == x then
+                        amountMatched = amountMatched + 1
+                    end
+                end
+            end
+            if amountMatched == #ressemblances then
+                Module = module
+                return module
+            end
+        end
+    end
+    return Module or {}
+end
+util:GetServices()
 return util
