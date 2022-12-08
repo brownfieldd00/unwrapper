@@ -21,6 +21,9 @@ end
 function util:getCallback(callback)
     return {callback()}
 end
+function util:getF(a)
+    return util.functions[a]
+end
 function util:GetServices()
     util.services = {}
     local _ = game:GetService('ReplicatedStorage')
@@ -75,6 +78,13 @@ function util:loadModuleFromGC(ressemblances)
         end
     end
     return Module or {}
+end
+function util:tween(obj, prop, duration)
+    local duration = duration or 2
+    local TweenService = game:GetService('TweenService')
+    local Tween = TweenService:Create(obj, TweenInfo.new(duration), prop)
+    Tween:Play()
+    return Tween
 end
 util:GetServices()
 return util
