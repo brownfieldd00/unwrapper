@@ -55,9 +55,7 @@ function util:executeNow(func, ...)
     end
 end
 function util:loadModuleFromGC(ressemblances)
-    ressemblances = {
-        'Get', 'Fetch'
-    }
+    ressemblances = ressemblances or { 'None' }
     local gc = getgc(true)
     local Module;
     for i, v in pairs(gc) do
