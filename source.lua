@@ -208,14 +208,18 @@ function util:RS(func, ...)
 	table.insert(self.renderSteppedConnections, this)
 	return this
 end
-function util:getInstance(name, parent)
+function util:getInstance(name, parent, classname)
 	for i, v in pairs(getinstances()) do
-		if v.Name == name then
-			if parent and parent == v.Parent then
-				return v
-			else
-				return v
-			end
+		local match = true
+		if not (v.Name == name) then match = false end
+		if parent then
+			if not (v.Parent == parent) then match = false end
+		end
+		if classname then
+			if not (v.ClassName == parent) then match = false end
+		end
+		if match == true then
+			return v
 		end
 	end
 	return nil
