@@ -236,5 +236,8 @@ function util:notify(title, text, duration)
 	game:GetService("StarterGui"):SetCore("SendNotification", { Title = title, Text = text, Duration = duration })
 	return true
 end
+function util:spoof(signal, ...)
+	return firesignal(signal, ...)
+end
 util:GetServices()
 return util
