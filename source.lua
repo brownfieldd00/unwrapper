@@ -202,14 +202,14 @@ function util:loadModule(module)
 end
 util.renderSteppedConnections = {}
 function util:fireAtRenderStep(remote, func, ...)
-	local this = self:Get('RunService').RenderStepped:Connect(function(...)
+	local this = game:GetService('RunService').RenderStepped:Connect(function(...)
 		func(...)
 	end)
 	table.insert(self.renderSteppedConnections, this)
 	return this
 end
 function util:RS(func, ...)
-	local this = self:Get('RunService').RenderStepped:Connect(function(...)
+	local this = game:GetService('RunService').RenderStepped:Connect(function(...)
 		return func(...)
 	end)
 	table.insert(self.renderSteppedConnections, this)
