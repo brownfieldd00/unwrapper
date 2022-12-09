@@ -192,6 +192,7 @@ function util:attemptRemove(x)
         x:Destroy()
         return true
     end
+    return false
 end
 util:GetServices()
 return util
