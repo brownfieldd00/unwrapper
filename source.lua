@@ -1,10 +1,10 @@
 util = {}
 util.functions = {}
 util.services = {}
-util.empty = function()
-	return {}
-end
 util.zero = 0
+function util.empty()
+	return table.create()
+end
 function util:get(url)
 	return game:HttpGet(url)
 end
