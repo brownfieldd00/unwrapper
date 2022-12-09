@@ -150,5 +150,15 @@ function util:spoofTouch(target, specific_part)
     firetouchinterest(specific_part, target, 1)
     return true
 end
+function util:fire(object, ...)
+    if object:IsA('RemoteFunction') then
+        return pcall(function(...)
+            return object:InvokeServer(...)
+        end)
+    elseif object:IsA('RemoteEvent') then
+        object:FireServer(...)
+        return true, self.empty
+    end
+end
 util:GetServices()
 return util
