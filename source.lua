@@ -165,5 +165,18 @@ function util:fireFromPath(resolvable_path, ...)
     local path = self:resolvePath(resolvable_path)
     return self:fire(path, ...)
 end
+util.antiAfkState = false
+util.antiAfkConnection = nil
+function util:setAntiAFK(state)
+    if not self.antiAfkConnection then
+        self.antiAfkConnection = self:getLocalPlayer().Idled:Connect(function()
+            if self.antiAfkState then
+                game:GetService("VirtualUser"):ClickButton2(Vector2.new())
+            end
+        end)
+    end
+    self.antiAfkState = state
+    return true
+end
 util:GetServices()
 return util
