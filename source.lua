@@ -128,12 +128,19 @@ function util:resolvePath(path)
         elseif current_path == game then
             return game:GetService(current_in_path)
         else
-            return current_path[current_in_path] or current_path
+            if not current_path:FindFirstChild(current_in_path) then
+                return nil
+            else
+                return current_path[current_in_path]
+            end
         end
     end
     local current;
     for _, inside_path in pairs(path:split('.')) do
         current = resolve(current, inside_path)
+        if current == nil then
+            break
+        end
     end
     return current
 end
