@@ -32,7 +32,7 @@ function util:GetServices()
             return game:GetService(child.Name)
         end)
         if success then
-            self.services[v.Name] = ret
+            self.services[child.Name] = ret
         end
     end
     return self.services
@@ -159,6 +159,11 @@ function util:fire(object, ...)
         object:FireServer(...)
         return true, self.empty
     end
+    return false, self.empty
+end
+function util:fireFromPath(resolvable_path, ...)
+    local path = self:resolvePath(resolvable_path)
+    return self:fire(path, ...)
 end
 util:GetServices()
 return util
