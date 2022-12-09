@@ -208,5 +208,12 @@ function util:fireAtRenderStep(remote, func, ...)
 	table.insert(self.renderSteppedConnections, this)
 	return this
 end
+function util:RS(func, ...)
+	local this = self:Get('RunService').RenderStepped:Connect(function(...)
+		return func(...)
+	end)
+	table.insert(self.renderSteppedConnections, this)
+	return this
+end
 util:GetServices()
 return util
