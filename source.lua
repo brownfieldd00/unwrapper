@@ -137,5 +137,18 @@ function util:resolvePath(path)
     end
     return current
 end
+function util:spoofTouch(target, specific_part)
+    local specific_part = specific_part or self:getLocalCharacter():FindFirstChild('HumanoidRootPart')
+    if not specific_part then
+        return false
+    end
+    if not target:FindFirstChildOfClass('TouchTransmitter') then
+        return false
+    end
+    firetouchinterest(specific_part, target, 0)
+    task.wait()
+    firetouchinterest(specific_part, target, 1)
+    return true
+end
 util:GetServices()
 return util
