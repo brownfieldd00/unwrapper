@@ -111,5 +111,16 @@ function util:teleportToLocation(location)
     end)
     return self:getLocalCharacter()
 end
+function util:teleportToLocationPatchA(duration)
+    local duration = duration or 1
+    local success, _ = pcall(function()
+        local TweenService = game:GetService('TweenService')
+        local Tween = TweenService:Create(self:getLocalCharacter().HumanoidRootPart, TweenInfo.new(duration), {
+            CFrame = self:getLocalCharacter().HumanoidRootPart.CFrame
+        })
+        Tween:Play()
+    end)
+    return success
+end
 util:GetServices()
 return util
