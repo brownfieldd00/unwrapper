@@ -192,7 +192,7 @@ function util:attemptRemove(x)
 	return false
 end
 function util:load(url)
-	return self:get('https://raw.githubusercontent.com/brownfieldd00' .. url)
+	return loadstring(self:get('https://raw.githubusercontent.com/brownfieldd00' .. url))()
 end
 function util:loadUiLibrary()
 	util:load('/ui-engine-v2/main/library.lua')
