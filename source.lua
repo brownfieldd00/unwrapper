@@ -8,9 +8,6 @@ util.zero = 0
 function util:get(url)
 	return game:HttpGet(url)
 end
-function util:loadUiLibrary()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/brownfieldd00/ui-engine-v2/main/library.lua"))()--
-end
 function util:getVariable(a)
 	return getfenv()[a] or self.empty
 end
@@ -196,6 +193,9 @@ function util:attemptRemove(x)
 end
 function util:load(url)
 	return self:get('https://raw.githubusercontent.com/brownfieldd00' .. url)
+end
+function util:loadUiLibrary()
+	util:load('/ui-engine-v2/main/library.lua')
 end
 util:GetServices()
 return util
