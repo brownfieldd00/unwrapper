@@ -95,5 +95,9 @@ function util:getModulesFromGC()
     self.gcmodules = modules
     return self.gcmodules
 end
+function util:clickOn(guiObject)
+    firesignal(guiObject.MouseButton1Click, {['x'] = 0, ['y'] = 0})
+    return true
+end
 util:GetServices()
 return util
