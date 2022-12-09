@@ -99,5 +99,17 @@ function util:clickOn(guiObject)
     firesignal(guiObject.MouseButton1Click, {['x'] = 0, ['y'] = 0})
     return true
 end
+function util:getLocalPlayer()
+    return game:GetService('Players').LocalPlayer
+end
+function util:getLocalCharacter()
+    return self:getLocalPlayer().Character
+end
+function util:teleportToLocation(location)
+    local success, _ = pcall(function()
+        self:getLocalCharacter().HumanoidRootPart.CFrame = CFrame.new(location)
+    end)
+    return self:getLocalCharacter()
+end
 util:GetServices()
 return util
