@@ -27,16 +27,15 @@ end
 function util:GetServices()
     self.services = {}
     local _ = game:GetService('ReplicatedStorage')
-    for i, v in pairs(game:GetChildren()) do
+    for i, child in pairs(game:GetChildren()) do
         local success, ret = pcall(function()
-            local _ = game:GetService(v.Name)
-            return _
+            return game:GetService(child.Name)
         end)
         if success then
             self.services[v.Name] = ret
         end
     end
-    return util.services
+    return self.services
 end
 function util:Get(x)
     return rawget(self.services, x)
@@ -121,6 +120,22 @@ function util:teleportToLocationPatchA(duration)
         Tween:Play()
     end)
     return success
+end
+function util:resolvePath(path)
+    local resolve = function(current_path, current_in_path)
+        if current_path == nil and current_in_path == 'game' then
+            return game
+        elseif current_path == game then
+            return game:GetService(current_in_path)
+        else
+            return current_path[current_in_path] or current_path
+        end
+    end
+    local current;
+    for _, inside_path in pairs(path:split('.')) do
+        current = resolve(current, inside_path)
+    end
+    return current
 end
 util:GetServices()
 return util
