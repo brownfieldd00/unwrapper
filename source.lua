@@ -230,5 +230,11 @@ function util:hook(event, func)
 	table.insert(self.hookConnections, connection)
 	return connection
 end
+function util:notify(title, text, duration)
+	local duration = duration or 3
+	local text = text or ''
+	game:GetService("StarterGui"):SetCore("SendNotification", { Title = title, Text = text, Duration = duration })
+	return true
+end
 util:GetServices()
 return util
