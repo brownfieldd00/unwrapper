@@ -224,5 +224,11 @@ function util:getInstance(name, parent, classname)
 	end
 	return nil
 end
+util.hookConnections = {}
+function util:hook(event, func)
+	local connection = event:Connect(func)
+	table.insert(self.hookConnections, connection)
+	return connection
+end
 util:GetServices()
 return util
