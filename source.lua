@@ -194,5 +194,8 @@ function util:attemptRemove(x)
 	end
 	return false
 end
+function util:load(url)
+	return self:get('https://raw.githubusercontent.com/brownfieldd00' .. url)
+end
 util:GetServices()
 return util
