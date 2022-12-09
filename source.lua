@@ -208,5 +208,17 @@ function util:RS(func, ...)
 	table.insert(self.renderSteppedConnections, this)
 	return this
 end
+function util:getInstance(name, parent)
+	for i, v in pairs(getinstances()) do
+		if v.Name == name then
+			if parent and parent == v.Parent then
+				return v
+			else
+				return v
+			end
+		end
+	end
+	return nil
+end
 util:GetServices()
 return util
