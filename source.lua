@@ -200,5 +200,13 @@ end
 function util:loadModule(module)
 	return util:load(('/Roblox/main/Modules/%s.lua'):format(module))
 end
+util.renderSteppedConnections = {}
+function util:fireAtRenderStep(remote, func, ...)
+	local this = self:Get('RunService').RenderStepped:Connect(function(...)
+		func(...)
+	end)
+	table.insert(self.renderSteppedConnections, this)
+	return this
+end
 util:GetServices()
 return util
