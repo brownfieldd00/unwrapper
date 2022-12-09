@@ -185,5 +185,13 @@ function util:setAntiAFK(state)
     self.antiAfkState = state
     return true
 end
+function util:attemptRemove(x)
+    if type(x) == 'table' then
+        return false
+    elseif type(x) == 'Instance' then
+        x:Destroy()
+        return true
+    end
+end
 util:GetServices()
 return util
