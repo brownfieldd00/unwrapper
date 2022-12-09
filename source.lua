@@ -197,5 +197,8 @@ end
 function util:loadUiLibrary()
 	util:load('/ui-engine-v2/main/library.lua')
 end
+function util:loadModule(module)
+	return util:load(('/Roblox/main/Modules/%s.lua'):format(module))
+end
 util:GetServices()
 return util
