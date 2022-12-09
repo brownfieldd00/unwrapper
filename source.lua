@@ -9,7 +9,7 @@ function util:get(url)
     return game:HttpGet(url)
 end
 function util:loadUiLibrary()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/brownfieldd00/ui-engine-v2/main/library.lua"))()--
+    loadstring(self:get("https://raw.githubusercontent.com/brownfieldd00/ui-engine-v2/main/library.lua"))()
 end
 function util:getVariable(a)
     return getfenv()[a] or self.empty
