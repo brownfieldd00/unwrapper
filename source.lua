@@ -1,3 +1,4 @@
+-- DEPRECATED. DO NOT USE.
 util = {}
 util.functions = {}
 util.services = {}
